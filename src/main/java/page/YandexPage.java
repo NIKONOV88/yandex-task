@@ -24,6 +24,15 @@ public class YandexPage {
         queryArea.sendKeys(text);
     }
 
+    public String getFirstOfferedItem() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return getDriver().findElement(By.xpath("(//li[contains(@class,'suggest')])[1]")).getText();
+    }
+
     public List<String> getOfferedItems() {
         List<String> result = getDriver().findElements(By.xpath("//li[contains(@class,'suggest')]"))
                 .stream()

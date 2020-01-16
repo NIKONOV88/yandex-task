@@ -7,13 +7,12 @@ public class Main {
     public static void main(String[] args) {
         try {
             yandexPage.open();
-            yandexPage.request("по");
-            yandexPage.getOfferedItems();
-            yandexPage.request("п");
-            yandexPage.getOfferedItems();
-            yandexPage.request("погодаhhhhhhg");
-            yandexPage.getOfferedItems();
-            WebDriverManager.quitDriver();
+            yandexPage.request("погода р");
+            System.out.println(yandexPage.getFirstOfferedItem());
+            yandexPage.request("пого");
+            System.out.println(yandexPage.getFirstOfferedItem());
+            yandexPage.request("погода");
+            System.out.println(yandexPage.getFirstOfferedItem());
         } finally {
             WebDriverManager.quitDriver();
         }
