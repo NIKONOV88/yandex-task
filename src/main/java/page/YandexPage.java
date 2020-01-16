@@ -3,6 +3,8 @@ package page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,24 @@ public class YandexPage {
             e.printStackTrace();
         }
         return getDriver().findElement(By.xpath("(//li[contains(@class,'suggest')])[1]")).getText();
+    }
+
+    public String get(){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<WebElement> el = getDriver().findElements(By.xpath("(//li[contains(@class,'suggest')])[1]/span"));
+        List<String> list = el.stream().map(e -> parse(e)).collect(Collectors.toList());
+        return String.join(" ", list);
+    }
+
+    public String parse(WebElement el){
+        if(el.getAttribute("class").contains("item__icon")){
+            return el.getAttribute("style");
+        }
+        return el.getText();
     }
 
     public List<String> getOfferedItems() {

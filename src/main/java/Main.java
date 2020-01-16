@@ -8,7 +8,7 @@ public class Main {
         try {
             yandexPage.open();
             yandexPage.request("погода р");
-            System.out.println(yandexPage.getFirstOfferedItem());
+            System.out.println(yandexPage.get());
             yandexPage.request("пого");
             System.out.println(yandexPage.getFirstOfferedItem());
             yandexPage.request("погода");
