@@ -1,29 +1,32 @@
 package page;
 
+import core.PageMain;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static core.WebDriverManager.getDriver;
+public class YandexPage extends PageMain {
 
-public class YandexPage {
-
-    public static final String NAME = "Главная страница Яндекс";
-    private By requestArea = By.xpath("//input[@aria-label='Запрос']");
-
-    public void open() {
-        getDriver().get("https://yandex.ru/");
+    public YandexPage() {
+        super("Главная страница Яндекс.");
     }
 
-    public void request(String text) {
-        System.out.println("Вводим текст: " + text);
-        WebElement queryArea = getDriver().findElement(requestArea);
+    private By requestArea = By.xpath("//input[@aria-label='Запрос']");
+    private By firstOfferedItem = By.xpath("//input[@aria-label='Запрос']");
+    private By searchForm = By.xpath("//form[@aria-label='Поиск в интернете']");
+
+    public void open() {
+        driver.get("https://yandex.ru/");
+    }
+
+    public YandexPage request(String text) {
+        System.out.println(name + " Вводим в строку поиска текст: " + text);
+        WebElement queryArea = waitVisibility(requestArea);
         queryArea.clear();
         queryArea.sendKeys(text);
+        return this;
     }
 
     public String getFirstOfferedItem() {
@@ -32,29 +35,29 @@ public class YandexPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return getDriver().findElement(By.xpath("(//li[contains(@class,'suggest')])[1]")).getText();
+        return driver.findElement(firstOfferedItem).getText();
     }
 
-    public String get(){
+    public String get() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<WebElement> el = getDriver().findElements(By.xpath("(//li[contains(@class,'suggest')])[1]/span"));
+        List<WebElement> el = driver.findElements(By.xpath("(//li[contains(@class,'suggest')])[1]/span"));
         List<String> list = el.stream().map(e -> parse(e)).collect(Collectors.toList());
         return String.join(" ", list);
     }
 
-    public String parse(WebElement el){
-        if(el.getAttribute("class").contains("item__icon")){
+    public String parse(WebElement el) {
+        if (el.getAttribute("class").contains("item__icon")) {
             return el.getAttribute("style");
         }
         return el.getText();
     }
 
     public List<String> getOfferedItems() {
-        List<String> result = getDriver().findElements(By.xpath("//li[contains(@class,'suggest')]"))
+        List<String> result = driver.findElements(By.xpath("//li[contains(@class,'suggest')]"))
                 .stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
@@ -65,7 +68,7 @@ public class YandexPage {
     }
 
     public List<String> getOfferedItems2() {
-        List<String> result = getDriver().findElements(By.xpath("//div[@class='popup__content']//li/descendant::*"))
+        List<String> result = driver.findElements(By.xpath("//div[@class='popup__content']//li/descendant::*"))
                 .stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
