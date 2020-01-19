@@ -1,22 +1,26 @@
 import core.WebDriverManager;
+import lombok.extern.slf4j.Slf4j;
 import page.YandexPage;
 
+@Slf4j
 public class Main {
-    static YandexPage yandexPage = new YandexPage();
+    private static YandexPage yandexPage = new YandexPage();
+
 
     public static void main(String[] args) {
         try {
             yandexPage.open();
-            yandexPage.request("пого");
-            System.out.println(yandexPage.get());
-            yandexPage.request("погода р");
-            System.out.println(yandexPage.get());
-            yandexPage.request("погода");
-            System.out.println(yandexPage.get());
-            yandexPage.request("погодаdfdsgbhgrt rtyhsrt ts rs tsert ");
-            System.out.println(yandexPage.get());
+            getFirstOrderedItemBySearch("погода");
+            getFirstOrderedItemBySearch("Липецк");
+            getFirstOrderedItemBySearch("Лото");
+
         } finally {
             WebDriverManager.quitDriver();
         }
+    }
+
+    static String getFirstOrderedItemBySearch(String text) {
+        return yandexPage.typeRequest(text)
+                .getFirstOrderedItem();
     }
 }

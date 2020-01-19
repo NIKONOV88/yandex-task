@@ -1,29 +1,44 @@
 package core;
 
-import com.google.errorprone.annotations.concurrent.LazyInit;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+/**
+ * Класс отвечающий за работу с WebDriver
+ */
+@Slf4j
 public class WebDriverManager {
 
-    private WebDriverManager() {}
+    private static final String PATH = Property.getValue("driver.path");
+    private static WebDriver driver = null;
 
-    @LazyInit
-    public static WebDriver driver = initDriver();
+    private WebDriverManager() {
+    }
 
-    private static WebDriver initDriver() {
+    public static boolean isInit() {
+        return driver != null;
+    }
+
+    public static WebDriver getDriver() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\driver\\chromedriver77.exe");
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            return driver;
+            try {
+                log.debug("Открыть браузер. Путь к драйверу: {}", PATH);
+                System.setProperty("webdriver.chrome.driver", PATH);
+                driver = new ChromeDriver();
+                driver.manage().window().maximize();
+                return driver;
+            } catch (Exception e) {
+                throw new YandexTaskException("Ошибка при создании драйвера", e);
+            }
         } else {
             return driver;
         }
     }
 
-    public static void quitDriver(){
-        if(driver != null){
+    public static void quitDriver() {
+        if (isInit()) {
+            log.debug("Завершить работу драйвера");
             driver.quit();
         }
     }
