@@ -16,13 +16,13 @@ public class AssertStep {
 
     @Step("Проверка, {message}")
     public static <T> void assertEquals(String message, T actual, T expected) {
-        log.info("Проверка, {} \n\tактуальное значение: {}, \n\tожидаемое значение:  {}", message, actual, expected);
+        log.info("Проверка, {} \n\tактуальное значение: {} \n\tожидаемое значение:  {}", message, actual, expected);
         Assertions.assertEquals(actual, expected, "Ошибка при проверке. " + message);
     }
 
     @Step("Проверка, {message}")
     public static void assertTrue(String message, Boolean condition) {
-        log.info("Проверка, {}", message);
+        log.info("Проверка, {}: {}", message, condition);
         Assertions.assertTrue(condition, "Ошибка при проверке. " + message);
     }
 }

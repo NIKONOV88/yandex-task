@@ -1,0 +1,36 @@
+Пару слов о проекте.
+
+Для корректной работы необходимо:
+jdk8
+IntellijIDEA
+git
+maven
+
+Так же необходимо скачать плагин Lombok для IDE
+Как это сделать:
+1 file -> settings -> pligins -> ввести в строку поиска Lomok -> нажать install напротив найденного плагина Lomok
+2 file -> settings -> Build, Execution, Deployment -> Annotation Processor -> активировать чекбокс Enable annotation processing в верху страницы.
+
+Что использовалось в проетке:
+selenium - работа с браузером
+jupiter - работа с тестами
+allure - работа с тестовым отчетом
+slf4j-log4j12 - логирование
+lombok - для уменьшения boilerplate code
+
+За основу работы с браузером использовался паттерн Page Object
+
+Задача №1
+Реализована в классе java.Task1
+Так как в задачи нет проверок, решение реализованно в обычном public static void main
+
+Задача №2
+Реализована в классе test.Task2
+Помимо логов можно посмотреть Allure отчет
+Как это сделать:
+
+Запустить команду maven clear
+maven -> yandex-task -> Lifecycle -> clean
+Запустуть выполнение тестам
+Запустить команду плагина Allure serve
+maven -> yandex-task -> Plugins -> allure -> allure:serve

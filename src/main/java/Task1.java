@@ -1,9 +1,10 @@
 import core.WebDriverManager;
-import lombok.extern.slf4j.Slf4j;
 import page.YandexPage;
 
-@Slf4j
-public class Main {
+/**
+ * Класс реализует выполнение задачи №1
+ */
+public class Task1 {
     private static YandexPage yandexPage = new YandexPage();
 
 

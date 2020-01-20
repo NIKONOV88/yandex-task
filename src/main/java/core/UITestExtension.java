@@ -13,17 +13,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+/**
+ * Класс обеспечивает корректную работу UI тестов.
+ * Закрывает сессию драйвера
+ * Делает скриншот и прикрепляет его к allure отчету в случает ошибки
+ * Оповещает о состоянии теста.
+ */
 @Slf4j
 public class UITestExtension implements TestWatcher, AfterEachCallback, BeforeEachCallback {
 
     @Override
-    public void afterEach(ExtensionContext extensionContext) throws Exception {
-        log.warn("END TEST:\t{}", extensionContext.getDisplayName());
+    public void afterEach(ExtensionContext extensionContext) {
+        log.warn("     END TEST:   {}\n", extensionContext.getDisplayName());
     }
 
     @Override
-    public void beforeEach(ExtensionContext extensionContext) throws Exception {
-        log.warn("START TEST:\t{}", extensionContext.getDisplayName());
+    public void beforeEach(ExtensionContext extensionContext) {
+        log.warn("     START TEST:   {}\n", extensionContext.getDisplayName());
     }
 
     @Override

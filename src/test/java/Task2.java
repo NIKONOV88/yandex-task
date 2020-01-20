@@ -4,8 +4,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import page.YandexPage;
 
+/**
+ * Класс реализует выполнение задачи №2
+ */
 @UITest
-class YandexTest {
+class Task2 {
 
     private static final String TAB_NAME = "Картинки";
     YandexPage yandexPage = new YandexPage();
