@@ -14,7 +14,6 @@ public class Task1 {
             getFirstOrderedItemBySearch("погода");
             getFirstOrderedItemBySearch("Липецк");
             getFirstOrderedItemBySearch("Лото");
-
         } finally {
             WebDriverManager.quitDriver();
         }

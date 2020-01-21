@@ -8,7 +8,7 @@ import page.YandexPage;
  * Класс реализует выполнение задачи №2
  */
 @UITest
-class Task2 {
+class Task2Test {
 
     private static final String TAB_NAME = "Картинки";
     YandexPage yandexPage = new YandexPage();

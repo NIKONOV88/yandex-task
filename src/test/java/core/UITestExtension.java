@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import static core.WebDriverManager.quitDriver;
+
 /**
  * Класс обеспечивает корректную работу UI тестов.
  * Закрывает сессию драйвера
@@ -35,19 +37,19 @@ public class UITestExtension implements TestWatcher, AfterEachCallback, BeforeEa
     @Override
     public void testSuccessful(ExtensionContext context) {
         log.info("-----SUCCESS------");
-        WebDriverManager.quitDriver();
+        quitDriver();
     }
 
     @Override
     public void testDisabled(ExtensionContext context, Optional<String> reason) {
         log.info("-----DISABLED------");
-        WebDriverManager.quitDriver();
+        quitDriver();
     }
 
     @Override
     public void testAborted(ExtensionContext context, Throwable cause) {
         log.info("-----ABORTED------");
-        WebDriverManager.quitDriver();
+        quitDriver();
     }
 
     @Override
@@ -55,7 +57,7 @@ public class UITestExtension implements TestWatcher, AfterEachCallback, BeforeEa
         log.error("-----FAILED------");
         if (WebDriverManager.isInit()) {
             makeScreenshotOnFailure();
-            WebDriverManager.quitDriver();
+            quitDriver();
         }
     }
 

@@ -25,12 +25,19 @@ lombok - для уменьшения boilerplate code
 Так как в задачи нет проверок, решение реализованно в обычном public static void main
 
 Задача №2
-Реализована в классе test.Task2
+Реализована в классе test.Task2Test
 Помимо логов можно посмотреть Allure отчет
 Как это сделать:
 
+Способ 1
 Запустить команду maven clear
 maven -> yandex-task -> Lifecycle -> clean
 Запустуть выполнение тестам
 Запустить команду плагина Allure serve
 maven -> yandex-task -> Plugins -> allure -> allure:serve
+
+Способ 2
+Ввести команду с помощью терминала(Terminal) или Execute Maven Goal
+Команда: mvn clean test -Dtest=Task2Test allure:serve
+
+В качестве дополнения. В задачи 1 картинки с погодой тоже парсятся )
